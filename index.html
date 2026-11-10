@@ -64,5 +64,118 @@
     <div class="notice" id="haqida"><strong>Hozirgi holat:</strong> Bu birinchi ko‘rinish (frontend prototip). Hozircha akkauntlar, postlarni saqlash, chat va e’lonlarni joylash serverga ulanmagan. Keyingi bosqichlarda xavfsiz kirish, ma’lumotlar bazasi va admin boshqaruvini qo‘shamiz.</div>
   </main>
   <footer>© 2026 UZ PLATFORM · Birgalikda rivojlanamiz</footer>
+  
+<!-- UZ PLATFORM FIREBASE AUTH -->
+
+<div id="authBox" style="display:none;position:fixed;inset:0;background:#0009;z-index:9999;align-items:center;justify-content:center;padding:15px">
+<div style="background:white;padding:24px;border-radius:18px;width:100%;max-width:380px">
+<h2>UZ PLATFORM</h2>
+<p>Ro‘yxatdan o‘tish</p>
+
+<button onclick="showEmail()">Gmail orqali</button>
+<button onclick="showPhone()">Telefon orqali</button>
+
+<div id="emailForm" style="display:none">
+<input id="email" type="email" placeholder="Gmail">
+<input id="password" type="password" placeholder="Parol">
+<button onclick="registerEmail()">Ro‘yxatdan o‘tish</button>
+<button onclick="loginEmail()">Kirish</button>
+</div>
+
+<div id="phoneForm" style="display:none">
+<input id="phone" type="tel" value="+998" placeholder="+998901234567">
+<div id="recaptcha-container"></div>
+<button onclick="sendSMS()">SMS yuborish</button>
+<input id="smsCode" placeholder="SMS kod">
+<button onclick="verifySMS()">Tasdiqlash</button>
+</div>
+
+<p id="authMessage"></p>
+<button onclick="closeAuth()">Yopish</button>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+apiKey: "AIzaSyCOyfukG3_rADxQb6JygRCe54IBrTn8cMk",
+authDomain: "uz-platform.firebaseapp.com",
+projectId: "uz-platform",
+storageBucket: "uz-platform.firebasestorage.app",
+messagingSenderId: "724558728340",
+appId: "1:724558728340:web:aa269b2b9f6157e00d7881",
+measurementId: "G-HVFB8C9NH6"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+document.querySelector('.secondary').onclick = openAuth;
+
+function openAuth(){
+document.getElementById('authBox').style.display='flex';
+}
+function closeAuth(){
+document.getElementById('authBox').style.display='none';
+}
+function showEmail(){
+emailForm.style.display='block';
+phoneForm.style.display='none';
+}
+function showPhone(){
+phoneForm.style.display='block';
+emailForm.style.display='none';
+setupRecaptcha();
+}
+function msg(t){
+document.getElementById('authMessage').textContent=t;
+}
+async function registerEmail(){
+try{
+await auth.createUserWithEmailAndPassword(email.value,password.value);
+msg("Ro‘yxatdan o‘tildi!");
+}catch(e){msg(e.message);}
+}
+async function loginEmail(){
+try{
+await auth.signInWithEmailAndPassword(email.value,password.value);
+msg("Kirish muvaffaqiyatli!");
+}catch(e){msg(e.message);}
+}
+
+let recaptchaVerifier;
+let confirmationResult;
+
+function setupRecaptcha(){
+if(recaptchaVerifier)return;
+recaptchaVerifier=new firebase.auth.RecaptchaVerifier(
+'recaptcha-container',{size:'normal'}
+);
+recaptchaVerifier.render().catch(e=>msg(e.message));
+}
+
+async function sendSMS(){
+try{
+const number=document.getElementById('phone').value.trim();
+if(!/^\+[1-9]\d{7,14}$/.test(number)){
+msg("Raqamni +998901234567 shaklida yozing");
+return;
+}
+await recaptchaVerifier.render();
+confirmationResult=await auth.signInWithPhoneNumber(number,recaptchaVerifier);
+msg("SMS yuborildi!");
+}catch(e){msg(e.message);}
+}
+async function verifySMS(){
+try{
+await confirmationResult.confirm(
+document.getElementById('smsCode').value.trim()
+);
+msg("Telefon tasdiqlandi!");
+}catch(e){msg("SMS kod xato!");}
+}
+</script>
 </body>
 </html>
