@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a56">
+  <title>UZ PLATFORM — O‘zbekiston uchun yagona platforma</title>
+  <style>
+    :root{--navy:#102a56;--blue:#2563eb;--bg:#f4f7fc;--ink:#17233b;--muted:#64748b}
+    *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+    header{background:var(--navy);color:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0}
+    .brand{font-size:22px;font-weight:800;letter-spacing:.4px}.brand span{color:#8bb7ff}
+    nav{display:flex;gap:16px;flex-wrap:wrap} nav a{color:#e5edff;text-decoration:none;font-size:14px}
+    .hero{padding:56px 5% 44px;background:linear-gradient(135deg,#102a56,#2563eb);color:white}
+    .hero-inner{max-width:1000px;margin:auto}.tag{display:inline-block;background:#ffffff20;border:1px solid #ffffff40;padding:7px 12px;border-radius:30px;font-size:12px}
+    h1{font-size:clamp(32px,7vw,54px);line-height:1.08;margin:18px 0 12px;max-width:720px}
+    .hero p{max-width:650px;color:#e1eaff;line-height:1.6;font-size:16px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+    button,.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:700;cursor:pointer;text-decoration:none}
+    .primary{background:white;color:var(--navy)}.secondary{background:#ffffff20;color:white;border:1px solid #ffffff70}
+    main{max-width:1100px;margin:auto;padding:30px 5% 60px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:8px 0 18px}
+    h2{margin:0;font-size:24px}.muted{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .card{background:white;border:1px solid #e5eaf3;border-radius:18px;padding:20px;box-shadow:0 5px 18px #102a560a}
+    .icon{font-size:28px}.card h3{margin:12px 0 7px}.card p{color:var(--muted);line-height:1.5;font-size:14px;margin:0}
+    .notice{margin-top:22px;background:#eaf1ff;border:1px solid #d4e2ff;padding:16px;border-radius:14px;color:#29436e;font-size:13px;line-height:1.5}
+    footer{text-align:center;padding:22px;color:#718096;font-size:13px}
+    @media(max-width:560px){header{align-items:flex-start;flex-direction:column}nav{gap:12px}.hero{padding-top:42px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">UZ <span>PLATFORM</span></div>
+    <nav aria-label="Asosiy menyu">
+      <a href="#bolimlar">Bo‘limlar</a><a href="#haqida">Loyiha haqida</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="tag">O‘zbekiston uchun raqamli makon</span>
+      <h1>Kerakli xizmatlar — bitta platformada.</h1>
+      <p>Hamjamiyat, e’lonlar, o‘yinlar va foydali onlayn vositalar uchun yagona qulay manzil.</p>
+      <div class="actions">
+        <a class="btn primary" href="#bolimlar">Bo‘limlarni ko‘rish</a>
+        <button class="secondary" onclick="alert('Ro‘yxatdan o‘tish bo‘limi keyingi bosqichda ulanadi.')">Ro‘yxatdan o‘tish</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="section-head" id="bolimlar">
+      <div><h2>Platforma bo‘limlari</h2><div class="muted">Kerakli yo‘nalishni tanlang</div></div>
+    </div>
+    <div class="grid">
+      <article class="card"><div class="icon">👥</div><h3>Hamjamiyat</h3><p>Fikrlar, postlar va foydalanuvchilar bilan muloqot.</p></article>
+      <article class="card"><div class="icon">🛍️</div><h3>E’lonlar bozori</h3><p>Mahsulot va xizmatlar uchun e’lonlar joyi.</p></article>
+      <article class="card"><div class="icon">🎮</div><h3>O‘yinlar</h3><p>O‘yin yangiliklari, jamoalar va turnirlar.</p></article>
+      <article class="card"><div class="icon">🧰</div><h3>Foydali vositalar</h3><p>Kundalik ishlar uchun sodda onlayn yordamchilar.</p></article>
+      <article class="card"><div class="icon">📚</div><h3>Bilim</h3><p>O‘rganish va foydali ma’lumotlar bo‘limi.</p></article>
+      <article class="card"><div class="icon">⭐</div><h3>Reyting</h3><p>Faol ishtirokchilar va hamjamiyat baholari.</p></article>
+    </div>
+    <div class="notice" id="haqida"><strong>Hozirgi holat:</strong> Bu birinchi ko‘rinish (frontend prototip). Hozircha akkauntlar, postlarni saqlash, chat va e’lonlarni joylash serverga ulanmagan. Keyingi bosqichlarda xavfsiz kirish, ma’lumotlar bazasi va admin boshqaruvini qo‘shamiz.</div>
+  </main>
+  <footer>© 2026 UZ PLATFORM · Birgalikda rivojlanamiz</footer>
+</body>
+</html>
